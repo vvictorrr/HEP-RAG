@@ -83,10 +83,10 @@ papers, 5,765 chunks) — not synthetic or assumed data. See
 **A methodological caveat that applies to the retrieval table below, stated
 up front rather than left implicit:** gold chunks were selected by
 inspecting each question's top-5 results from the `hybrid_rerank` config
-specifically (via `eval/prepare_labeling.py`), not from an independent,
-retriever-agnostic ground truth. This means the full pipeline's Recall@5 is
-not a fully fair, apples-to-apples number against the other three configs —
-by construction, every gold chunk was already inside `hybrid_rerank`'s own
+specifically, not from an independent, retriever-agnostic ground truth.
+This means the full pipeline's Recall@5 is not a fully fair,
+apples-to-apples number against the other three configs — by
+construction, every gold chunk was already inside `hybrid_rerank`'s own
 shortlist, which mechanically inflates its measured recall relative to
 configs that were never given a chance to nominate their own top-5 as
 candidates. The comparison across configs is still informative (see
@@ -114,18 +114,17 @@ is asymmetric, requiring a separate adapter for encoding queries
 "proximity" adapter) — an early version of this pipeline used the document
 adapter symmetrically for both, which is a real, since-fixed defect. Fixing
 it and re-running produced an unchanged 0.000, ruling that out as the (sole)
-cause. Diagnostic inspection of raw dense-only output
-(`debug_dense_retrieval.py`) instead showed near-uniform cosine scores
-across the top-5 (e.g. 0.7694 to 0.7670 — separated by thousandths) and, for
-one question, top results drawn from entirely unrelated physics subfields
-(direct-detection detector calibration, gamma-ray indirect detection) rather
-than merely imprecise mono-jet-adjacent results. Both signatures point to a
-genuine domain/granularity mismatch rather than a remaining implementation
-bug: SPECTER2 is trained on citation-graph-based document-level topical
+cause. Diagnostic inspection of raw dense-only output instead showed
+near-uniform cosine scores across the top-5 (e.g. 0.7694 to 0.7670 —
+separated by thousandths) and, for one question, top results drawn from
+entirely unrelated physics subfields (direct-detection detector
+calibration, gamma-ray indirect detection) rather than merely imprecise
+mono-jet-adjacent results. Both signatures point to a genuine
+domain/granularity mismatch rather than a remaining implementation bug:
+SPECTER2 is trained on citation-graph-based document-level topical
 similarity (does paper A relate to paper B, typically via title+abstract),
 which is a different task from discriminating which specific, jargon-dense,
-256-token body-text passage answers a specific technical question. Full
-diagnostic detail is in `eval/retrieval_ranking_observations.md`.
+256-token body-text passage answers a specific technical question.
 
 A second, related finding: hybrid RRF *without* reranking does not clearly
 beat sparse alone — tied on Recall@5 (0.400) but notably worse on MRR (0.213
@@ -149,8 +148,7 @@ narrative chunks ranked higher. This pattern held even before the SPECTER2
 diagnosis and is more likely attributable to the reranker's own training
 distribution (`ms-marco-MiniLM-L-6-v2`, trained on web-search-style
 query-passage relevance) favoring fluent, question-echoing prose over
-terse tabular/enumerated technical content. See
-`eval/retrieval_ranking_observations.md` for the full case-by-case detail.
+terse tabular/enumerated technical content.
 
 ### Hallucination detection ablation (P/R/F1, n=69 labeled sentences across all 20 questions)
 
