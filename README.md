@@ -80,11 +80,11 @@ numbers anywhere, especially the full pipeline's Recall@5.
 
 SPECTER2's exact 0.000 was investigated as a possible bug (wrong query-side
 adapter) and fixed, but the number didn't change — diagnostic evidence
-(`eval/retrieval_ranking_observations.md`) points to a genuine domain
-mismatch instead: SPECTER2 is trained for document-level topical similarity,
-not fine-grained passage retrieval against jargon-dense technical text.
-Nearly all of the working pipeline's retrieval quality traces back to BM25 +
-cross-encoder reranking, not to the dense/SPECTER2 component.
+points to a genuine domain mismatch instead: SPECTER2 is trained for
+document-level topical similarity, not fine-grained passage retrieval
+against jargon-dense technical text. Nearly all of the working pipeline's
+retrieval quality traces back to BM25 + cross-encoder reranking, not to
+the dense/SPECTER2 component.
 
 **Hallucination detection ablation** (P/R/F1, n=69 labeled sentences):
 
@@ -143,7 +143,6 @@ running the ablation study, are in [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
 hep-rag/
 ├── README.md
 ├── REPRODUCIBILITY.md
-├── RESUME_BULLET.txt
 ├── requirements.txt
 ├── download_index.py
 ├── .streamlit/
@@ -174,8 +173,7 @@ hep-rag/
   see `report/report.md`'s Evaluation section.
 - **SPECTER2 contributes ~0 standalone retrieval value in this domain** —
   a genuine domain/granularity mismatch, investigated and documented rather
-  than left unexplained; see the ablation results above and
-  `eval/retrieval_ranking_observations.md`.
+  than left unexplained; see the ablation results above.
 - The NLI model may underperform on highly technical HEP claims that are
   semantically distant from its training data (news/entailment corpora),
   even when they're true — a known limitation of applying general-domain
