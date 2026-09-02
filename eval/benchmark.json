@@ -1,0 +1,593 @@
+{
+  "_README": "20 questions across 5 categories (A-E), 4 each. Hand-labeled against the real corpus (80 arXiv hep-ex papers on MET-based dark matter searches, ingested via src/ingest.py). gold_chunk_ids, ground_truth_answer, and labeled_sentences are populated for all 20 questions. Empty gold_chunk_ids (Category D questions, and some negative-example chunks in labeled_sentences) are intentional -- they mark cases where no retrieved chunk answers the question, used to test refusal and false-premise-correction behavior rather than retrieval recall. See eval/retrieval_ranking_observations.md for a pattern noticed during labeling (gold chunks with precise/tabular content sometimes ranking last among the 5 retrieved chunks) worth checking against the full ablation run.",
+  "questions": [
+    {
+      "id": "A1",
+      "category": "A",
+      "difficulty": "single_chunk",
+      "question": "What missing transverse energy (MET) threshold is typically applied in the signal region of a mono-jet dark matter search?",
+      "ground_truth_answer": "A Monte Carlo study of the MET cut optimization for the CMS monojet dark matter search found the optimal threshold producing the best signal limits to be MET > 350 GeV. The signal sample is selected by requiring MET > 350 GeV and the leading jet to have pT > 110 GeV and |eta| < 2.4 [1206.0753v1, Introduction].",
+      "gold_chunk_ids": [
+        "arxiv_1206.0753v1_s429_c2"
+      ],
+      "labeled_sentences": [
+        [
+          "A Monte Carlo study found the optimal MET cut for the CMS monojet dark matter search to be MET > 350 GeV, with the leading jet required to have pT > 110 GeV and |eta| < 2.4.",
+          "2012 dependent dark matter-nucleon interactions, respectively. 2 Monojet search The data used in the study of events with a monojet and missing transverse energy is recorded by a trigger that requires MET > 80(95) and atleast one jet with pT > 80 GeV. The trigger is found to be fully efficient for MET > 200 GeV and jet pT > 110 GeV. ... A Monte Carlo study of the optimization of the MET cut found the optimal cut producing the best limits on the dark matter signal to be MET > 350 GeV. The signal sample is therefore selected by requiring MET > 350 GeV and the jet with the highest transverse momentum to have pT > 110 GeV and |eta| < 2.4.",
+          "SUPPORTED"
+        ],
+        [
+          "A Monte Carlo study found the optimal MET cut for the CMS monojet dark matter search to be MET > 350 GeV, with the leading jet required to have pT > 110 GeV and |eta| < 2.4.",
+          "particles is of course only the momentum imbalance in the direction transverse to the beam... The simplest and best-known example of a search for large MET is the monojet search looking for a single QCD jet recoiling against nothing. In the underlying particle model the jet is typically assumed to be radiated from the initial state partons...",
+          "UNSUPPORTED"
+        ],
+        [
+          "The monojet search looks for a single QCD jet recoiling against missing transverse energy, with the jet typically assumed to be radiated from the initial state partons before DM production.",
+          "particles is of course only the momentum imbalance in the direction transverse to the beam... The simplest and best-known example of a search for large MET is the monojet search looking for a single QCD jet recoiling against nothing. In the underlying particle model the jet is typically assumed to be radiated from the initial state partons in the event before the collision produced the invisible components.",
+          "SUPPORTED"
+        ],
+        [
+          "The ATLAS monojet analysis uses a signal-region threshold of MET > 250 GeV.",
+          "A Monte Carlo study of the optimization of the MET cut found the optimal cut producing the best limits on the dark matter signal to be MET > 350 GeV. The signal sample is therefore selected by requiring MET > 350 GeV and the jet with the highest transverse momentum to have pT > 110 GeV and |eta| < 2.4.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "A2",
+      "category": "A",
+      "difficulty": "single_chunk",
+      "question": "What is the ABCD method and what is it used for in these analyses?",
+      "ground_truth_answer": "The ABCD method is a data-driven background-estimation technique that relies on two independent discriminating variables to separate signal from background. The two-dimensional plane formed by these variables is divided into four bins (A-D), and because the variables are independent, the yield in the bin with the smallest expected background (bin D) can be predicted from the other three bins' observed yields -- e.g. as (Obs. B x Obs. C)/Obs. A in the zero-signal limit -- rather than relying on simulation alone [2305.11649v2, Abstract].",
+      "gold_chunk_ids": [
+        "arxiv_2305.11649v2_s3137_c14",
+        "arxiv_2305.11649v2_s3138_c15",
+        "arxiv_2305.11649v2_s3139_c16"
+      ],
+      "labeled_sentences": [
+        [
+          "The ABCD method is a data-driven background estimation technique that relies on two independent discriminating variables, dividing the resulting two-dimensional plane into four bins labeled A through D.",
+          "A modified matrix (\"ABCD\") method is employed to estimate the backgrounds, relying on two independent variables to discriminate between signal and background. The two-dimensional plane formed by these variables is divided into four bins (A-D). Because the variables are independent, all four bins can be described using only three parameters: a normalization rate plus a vertical and a horizontal transfer coefficient.",
+          "SUPPORTED"
+        ],
+        [
+          "Because the two ABCD variables are independent, the background yield in the smallest bin, bin D, can be predicted from the other three bins as (Obs. B x Obs. C)/Obs. A.",
+          "The predicted yield in the bin with the smallest backgrounds (bin D) is extracted from the simultaneous four-bin fit by assuming zero signal, which corresponds to (Obs. B x Obs. C)/(Obs. A) in this limit.",
+          "SUPPORTED"
+        ],
+        [
+          "The ABCD method is a data-driven background estimation technique that relies on two independent discriminating variables, dividing the resulting two-dimensional plane into four bins labeled A through D.",
+          "help disentangle the standard or exotic origin of these fluxes. A very different approach to use cosmic rays as tracers of dark matter is to look for deviations of the expected galactic flux of electrons and protons at the Earth due to interactions with dark matter during their propagation through the galaxy.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The ABCD method used in this analysis divides events using five independent variables to define six background-estimation bins.",
+          "A modified matrix (\"ABCD\") method is employed to estimate the backgrounds, relying on two independent variables to discriminate between signal and background. The two-dimensional plane formed by these variables is divided into four bins (A-D).",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "A3",
+      "category": "A",
+      "difficulty": "single_chunk",
+      "question": "Which triggers are used to select events for a MET-based dark matter search?",
+      "ground_truth_answer": "For the ATLAS Emiss_T+jets dark matter measurement, single-object MET triggers named e.g. HLT_xe70 (2015), HLT_xe110_pufit_L1XE55 (2017), and HLT_xe110_pufit_xe70_L1XE50 (2018) are used, where the number following 'xe' denotes the Emiss_T threshold in GeV that must be satisfied. The specific trigger requirements differ by data-taking year [2402.13760v2].",
+      "gold_chunk_ids": [
+        "arxiv_2402.13760v2_s1474_c40"
+      ],
+      "labeled_sentences": [
+        [
+          "ATLAS Emiss_T+jets dark matter searches use single-object MET triggers such as HLT_xe70 in 2015 and HLT_xe110_pufit_L1XE55 in 2017, where the number following 'xe' denotes the Emiss_T threshold in GeV.",
+          "An \"xe\" (\"e\") followed by an integer denotes the threshold with respect to Emiss_T, meas (the electron pT) that has to be fulfilled for an event to pass the trigger in GeV, e.g. Emiss_T, meas > 70GeV for HLT_xe70. ... signal region, AM1mu, AM2mu [247] 2015 HLT_xe70 2016 HLT_xe90_mht_L1XE50 HLT_xe110_mht_L1XE50 2017 HLT_xe110_pufit_L1XE55 2018 HLT_xe110_pufit_xe70_L1XE50",
+          "SUPPORTED"
+        ],
+        [
+          "ATLAS Emiss_T+jets dark matter searches use single-object MET triggers such as HLT_xe70 in 2015 and HLT_xe110_pufit_L1XE55 in 2017, where the number following 'xe' denotes the Emiss_T threshold in GeV.",
+          "The set of triggers used for this analysis requires events to contain a muon with pT > 50 GeV. 3 Event reconstruction and selection Individual particles are reconstructed with the CMS particle-flow (PF) algorithm...",
+          "UNSUPPORTED"
+        ],
+        [
+          "CMS monophoton dark matter searches are collected using single-photon triggers that are fully efficient for the selected signal region.",
+          "The final state containing a photon and MET is also a signature of many new physics scenarios, including the production of dark matter particles. The dataset is collected by single-photon triggers that are fully efficient for the selected signal region.",
+          "SUPPORTED"
+        ],
+        [
+          "The ATLAS MET trigger threshold is fixed at xe50 across all data-taking years from 2015 to 2018.",
+          "signal region, AM1mu, AM2mu [247] 2015 HLT_xe70 2016 HLT_xe90_mht_L1XE50 HLT_xe110_mht_L1XE50 2017 HLT_xe110_pufit_L1XE55 2018 HLT_xe110_pufit_xe70_L1XE50 HLT_xe120_pufit_L1XE50 HLT_xe110_pufit_xe65_L1XE50",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "A4",
+      "category": "A",
+      "difficulty": "single_chunk",
+      "question": "How is pileup correction applied to jet energy measurements in these analyses?",
+      "ground_truth_answer": "Jet momentum is corrected for pileup via an overall energy subtraction that removes the extra energy clustered in the jet due to pileup interactions, following a procedure described in an external reference [1701.02042v4].",
+      "gold_chunk_ids": [
+        "arxiv_1701.02042v4_s3714_c14"
+      ],
+      "labeled_sentences": [
+        [
+          "Jet momentum is corrected for pileup via an overall energy subtraction that removes the extra energy clustered in the jet due to pileup interactions.",
+          "The jet momentum is defined as the vector sum of all particle momenta assigned to the jet... An overall energy subtraction is applied to correct for the extra energy clustered in jets due to pileup, following the procedure described in Ref. [57].",
+          "SUPPORTED"
+        ],
+        [
+          "The CMS pileup correction to missing transverse energy is parametrized as f(v) = c1(1 + erf(-c2|v|^c3)), fitted to simulated minimum-bias events with exactly one generated pp interaction.",
+          "The correction is parametrized by f(v) = c1(1.0 + erf(-c2|v|^c3)) where v is the vectorial pT sum of charged particles associated with a given pileup vertex. The coefficients c1 = -0.71, c2 = 0.09, and c3 = 0.62 are obtained by fitting the MET component parallel to the v direction as a function of |v| in simulated minimum bias events with exactly one generated pp interaction.",
+          "SUPPORTED"
+        ],
+        [
+          "Jet momentum is corrected for pileup via an overall energy subtraction that removes the extra energy clustered in the jet due to pileup interactions.",
+          "The correction is parametrized by f(v) = c1(1.0 + erf(-c2|v|^c3)) where v is the vectorial pT sum of charged particles associated with a given pileup vertex. The coefficients c1 = -0.71, c2 = 0.09, and c3 = 0.62 are obtained by fitting the MET component parallel to the v direction...",
+          "UNSUPPORTED"
+        ],
+        [
+          "The pileup correction coefficients used in this MET correction are c1 = 1.0, c2 = 0.5, and c3 = 1.0.",
+          "The coefficients c1 = -0.71, c2 = 0.09, and c3 = 0.62 are obtained by fitting the MET component parallel to the v direction as a function of |v| in simulated minimum bias events with exactly one generated pp interaction.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "B1",
+      "category": "B",
+      "difficulty": "multi_chunk_synthesis",
+      "question": "How do the background estimation strategy and the signal selection criteria work together to suppress the QCD multijet background in a mono-jet search?",
+      "ground_truth_answer": "In the ATLAS monojet search (1210.4491v2), signal-region selection criteria remove most of the QCD multijet background directly: a second jet is only allowed if it is not aligned with MET, events with more than two jets are vetoed, and the signal regions additionally require |Delta-phi(MET, jet2)| > 0.5. The small remaining multijet contamination that survives these cuts is then estimated directly from data: a control sample is built by inverting the jet-alignment/jet-multiplicity cuts, and a straight-line fit to the resulting second- or third-jet pT distribution is extrapolated below the 30 GeV threshold used to define signal-region jets, after subtracting top-quark and Z/W contamination via MC. The resulting multijet background estimate is at most about 1% of the total predicted background in SR1-SR3, and negligible in SR4.",
+      "gold_chunk_ids": [
+        "arxiv_1210.4491v2_s3596_c13",
+        "arxiv_1210.4491v2_s3572_c12",
+        "arxiv_1210.4491v2_s3583_c0",
+        "arxiv_1210.4491v2_s3595_c12"
+      ],
+      "labeled_sentences": [
+        [
+          "A second jet is only permitted in the ATLAS monojet signal region if it is not aligned with MET, and events with more than two jets are vetoed.",
+          "A search for a BSM excess is performed in monojet final states. Leptons are vetoed to suppress background contributions from Z/W plus jets. A second jet is allowed as long as it is not aligned with Emiss T, which would be the case in multijet background events with a mis-measured jet. Events with more than two jets are vetoed.",
+          "SUPPORTED"
+        ],
+        [
+          "The residual multijet background is estimated from data by inverting the jet-alignment and jet-multiplicity vetoes to build a control sample, then fitting a straight line to the resulting jet pT distribution and extrapolating it below 30 GeV.",
+          "Multijet events where one or more jets are severely mismeasured constitute a background that is not well modelled in the simulation. In order to measure this background from data, a sample is selected by applying all signal-region selection criteria except for the jet vetoes... The multijet background is then estimated by fitting a straight line to the second or third jet pT distributions in events passing the two selection criteria and then extrapolating the fit below a pT of 30 GeV.",
+          "SUPPORTED"
+        ],
+        [
+          "The resulting multijet background estimate is at most about 1% of the total predicted background in signal regions SR1-SR3, and negligible in SR4.",
+          "The resulting background estimates are given in table 6. They are at most 1% of the total background predicted for SR1-SR3, and are negligible for SR4.",
+          "SUPPORTED"
+        ],
+        [
+          "The residual multijet background is estimated from data by inverting the jet-alignment and jet-multiplicity vetoes to build a control sample, then fitting a straight line to the resulting jet pT distribution and extrapolating it below 30 GeV.",
+          "Background from QCD events mostly arises when the pT of one of the highest pT jets is underestimated or when a hadron in a jet undergoes a semileptonic decay, introducing missing pT that is aligned with that jet. To suppress this background, the angular difference Delta-phi between the leading jet and missing pT, and between the leading muon and missing pT, is required to exceed 0.5.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The multijet background estimate constitutes roughly 15% of the total background in signal region SR4.",
+          "The resulting background estimates are given in table 6. They are at most 1% of the total background predicted for SR1-SR3, and are negligible for SR4.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "B2",
+      "category": "B",
+      "difficulty": "multi_chunk_synthesis",
+      "question": "How do jet-ID and jet-veto-map requirements interact with the MET reconstruction to reduce instrumental fake-MET background?",
+      "ground_truth_answer": "The corpus contains material on jet-ID criteria and angular jet-veto requirements that reduce instrumental fake-MET background, but does not appear to contain material specifically describing 'jet-veto-maps' (spatial masking of noisy detector regions) as a distinct technique -- the retrieved evidence instead covers two related but different mechanisms. (1) Jet identification (jet-ID) criteria -- limiting the maximum neutral-hadron energy fraction to 0.9 and the maximum photon energy fraction to 0.95, rejecting the event if any jet fails these criteria -- are applied on top of dedicated anomaly-removal algorithms to guarantee efficient removal of anomalous high-MET events caused by detector noise [1411.0511v2]. (2) Separately, an angular jet veto -- rejecting events where a jet's azimuthal separation from MET, Delta-phi(jet, MET), falls below a threshold such as 0.4 -- is used to remove events where MET originates from jet momentum mismeasurement rather than genuine invisible particles [1704.03848v2]. These are complementary but distinct techniques, and neither retrieved chunk uses the specific term 'jet-veto-map.'",
+      "gold_chunk_ids": [
+        "arxiv_1411.0511v2_s4503_c3",
+        "arxiv_1704.03848v2_s5571_c2"
+      ],
+      "labeled_sentences": [
+        [
+          "Jet-ID criteria limiting the maximum neutral-hadron energy fraction to 0.9 and the maximum photon energy fraction to 0.95 are used to guarantee efficient removal of anomalous MET events, with the event rejected if any jet fails these criteria.",
+          "Imposing jet identification criteria that limit the maximum neutral hadron energy fraction to 0.9 and the maximum photon energy fraction to 0.95 guarantees efficient removal of such events. These requirements are presented in Ref. [22] and are frequently used in CMS data analyses. The event is rejected if any jet fails the jet identification criteria.",
+          "SUPPORTED"
+        ],
+        [
+          "An angular jet veto rejecting events with Delta-phi(jet, MET) < 0.4 is used to remove events where MET originates from jet mismeasurement.",
+          "Events with more than one jet or with a jet with Delta-phi(jets, Emiss T) < 0.4 are rejected (jet veto), the latter to remove events where Emiss T originates from jet mismeasurement.",
+          "SUPPORTED"
+        ],
+        [
+          "Jet-ID criteria limiting the maximum neutral-hadron energy fraction to 0.9 and the maximum photon energy fraction to 0.95 are used to guarantee efficient removal of anomalous MET events, with the event rejected if any jet fails these criteria.",
+          "Events with more than one jet or with a jet with Delta-phi(jets, Emiss T) < 0.4 are rejected (jet veto), the latter to remove events where Emiss T originates from jet mismeasurement.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The analyses use a jet-veto-map that masks specific noisy detector regions in eta-phi space to reduce instrumental fake MET.",
+          "Imposing jet identification criteria that limit the maximum neutral hadron energy fraction to 0.9 and the maximum photon energy fraction to 0.95 guarantees efficient removal of such events. These requirements are presented in Ref. [22] and are frequently used in CMS data analyses.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "B3",
+      "category": "B",
+      "difficulty": "multi_chunk_synthesis",
+      "question": "Compare how the Z(vv)+jets and W(lv)+jets background estimates are each derived, and how they relate to one another.",
+      "ground_truth_answer": "Across the retrieved analyses, W(lv)+jets and Z(vv)+jets background estimates are linked through data-driven cross-constraints rather than being derived fully independently. In one analysis (1801.08427v2), the Z(vv)+jets estimate is primarily constrained using a photon+jets control region, with an additional constraint on Z(vv)+jets coming from W(lv)+jets events in single-lepton b-vetoed control regions via W/Z transfer factors, with extra theoretical uncertainty assigned to that extrapolation. In a separate analysis (1811.10151v2), the relationship runs in a validation direction instead: a Z(mu-mu)+jets control sample has one of its two muons randomly removed to emulate a W+jets-like missing-momentum topology, and the resulting distribution is compared to simulation to derive a 20% uncertainty on the W+jets background prediction. In both cases, Z+jets and W(lv)+jets final states are kinematically similar enough that data collected in one lepton channel is used to either estimate or validate the background prediction for the other.",
+      "gold_chunk_ids": [
+        "arxiv_1801.08427v2_s2866_c0",
+        "arxiv_1811.10151v2_s2139_c4"
+      ],
+      "labeled_sentences": [
+        [
+          "The Z(vv)+jets background estimate is constrained in part using W(lv)+jets events in single-lepton b-vetoed control regions via W/Z transfer factors.",
+          "A further constraint on the Z(nunu)+jets background is given by W+jets events in the single lepton b-vetoed CRs via TW/Z transfer factors. Additional theoretical uncertainties are included for covering the extrapolation from W(lnu)+jets to Z(nunu)+jets events.",
+          "SUPPORTED"
+        ],
+        [
+          "A Z(mu-mu)+jets control sample with one muon randomly removed is used to emulate a W+jets-like topology, and comparison of this distribution to simulation yields a 20% uncertainty assigned to the W+jets background prediction.",
+          "One of the two muons is randomly removed to simulate a neutrino from W boson decay. The resulting missing momentum is added to the missing pT of the event and the value of mT recalculated before applying the signal region selection criteria. The level of agreement in the resulting distribution of m(mu,j) between data and simulation is also around 20%. On the basis of these two studies, a 20% uncertainty is assigned to the W+jets background prediction.",
+          "SUPPORTED"
+        ],
+        [
+          "The Z(vv)+jets background estimate is constrained in part using W(lv)+jets events in single-lepton b-vetoed control regions via W/Z transfer factors.",
+          "One of the two muons is randomly removed to simulate a neutrino from W boson decay. The resulting missing momentum is added to the missing pT of the event and the value of mT recalculated before applying the signal region selection criteria.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The uncertainty assigned to the W+jets background prediction from this cross-check is 5%.",
+          "The level of agreement in the resulting distribution of m(mu,j) between data and simulation is also around 20%. On the basis of these two studies, a 20% uncertainty is assigned to the W+jets background prediction.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "B4",
+      "category": "B",
+      "difficulty": "multi_chunk_synthesis",
+      "question": "What systematic uncertainties dominate the mono-jet search, and how do they propagate into the final limit-setting procedure?",
+      "ground_truth_answer": "The dominant systematic uncertainties in mono-jet dark-matter searches are the jet energy scale (JES) and resolution (JER), which can be dominant even at small MET, along with theoretical uncertainties from renormalisation/factorisation scale and PDF choice, which dominate in the signal region and can reach up to 15% post-fit (down from pre-fit values of up to 30%) [2402.13760v2]. Additional systematic contributions include pileup-reweighting uncertainty and fake-lepton/fake-MET estimates from a data-driven matrix method, with several of these uncertainty sources exhibiting strong correlations across the different measurement regions [2402.13760v2]. These uncertainties propagate into the final limit-setting procedure via a profile-likelihood-ratio fit: systematic sources enter as nuisance parameters that are constrained (profiled) simultaneously across signal and control regions, which is why post-fit uncertainties are substantially reduced relative to their pre-fit values. Separately, other analyses note more generally that Z/W+jets background systematic uncertainties have been identified as the overall limiting factor for mono-jet analysis sensitivity, and are constrained via a combined shape fit to the signal region and appropriate control regions [1812.08129v3].",
+      "gold_chunk_ids": [
+        "arxiv_2402.13760v2_s1336_c136",
+        "arxiv_2402.13760v2_s1245_c45",
+        "arxiv_1812.08129v3_s527_c18"
+      ],
+      "labeled_sentences": [
+        [
+          "The dominant experimental uncertainties are jet energy scale (JES) and resolution (JER), which can even be dominant at small MET.",
+          "The dominant experimental uncertainties are jet energy scale (JES) and resolution (JER), as introduced in Section 5.5.2. They can even be dominant at small Emiss T, const, where the JES estimate is impaired due to pileup and unlike detector responses to jets.",
+          "SUPPORTED"
+        ],
+        [
+          "Theoretical systematic uncertainties, particularly renormalisation/factorisation scale and PDF uncertainties, can become as large as 15% post-fit, reduced from pre-fit values of up to 30%.",
+          "Theoretical systematics, particularly the uncertainties related to renormalisation and factorisation scale as well as PDFs, dominate in both subregions... The uncertainty can become as large as 15%. Uncertainties related to the renormalisation and factorisation scale are reduced considerably in size compared to their pre-fit values of up to 30%.",
+          "SUPPORTED"
+        ],
+        [
+          "The dominant experimental uncertainties are jet energy scale (JES) and resolution (JER), which can even be dominant at small MET.",
+          "Since the systematic uncertainties plaguing the Z/W+jets background have been identified as the limiting factor in mono-jet analyses, much experimental and theoretical effort went into minimising these uncertainties... the systematic uncertainties are evaluated through a combined shape fit to the signal region and to appropriate control regions enriched by the dominant SM backgrounds.",
+          "UNSUPPORTED"
+        ],
+        [
+          "Post-fit theoretical systematic uncertainties in this analysis reach up to 50%.",
+          "Theoretical systematics, particularly the uncertainties related to renormalisation and factorisation scale as well as PDFs, dominate in both subregions... The uncertainty can become as large as 15%.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "C1",
+      "category": "C",
+      "difficulty": "partially_answerable",
+      "question": "What is the observed local significance of any excess in the signal region, and how does that compare to the excess reported in the previous data-taking period?",
+      "ground_truth_answer": "None of the retrieved chunks describe a local excess significance for a mono-jet MET-based collider dark matter search specifically, nor any comparison to a 'previous data-taking period' of the same search. The corpus does contain excess/significance figures from unrelated experiment types: a MADMAX dark-photon haloscope reports its largest excess has a local significance of 4.3-sigma, consistent with thermal noise alone (p is about 0.21) [2408.02368v2]; a multi-jet+MET collider search reports its observed LIMIT (not an excess) is about 2-sigma weaker than expected [1505.07826v2]; and separate direct-detection and indirect-detection results discuss unrelated excesses/null results in non-collider contexts. A correct answer should state that the corpus does not contain the specific comparison asked for, rather than fabricating one from these unrelated results.",
+      "gold_chunk_ids": [
+        "arxiv_2408.02368v2_s2816_c16"
+      ],
+      "labeled_sentences": [
+        [
+          "A dark-photon haloscope experiment, not a mono-jet collider search, reported an excess with local significance of 4.3-sigma, consistent with thermal noise (p is about 0.21).",
+          "The largest excess has a local significance of 4.3sigma. This is within the expectation of observing thermal noise only as the probability of observing a local excess at least this large is p is about 0.21 for the full dataset.",
+          "SUPPORTED"
+        ],
+        [
+          "The ATLAS mono-jet dark matter search observed a local excess significance of 4.3-sigma in its signal region.",
+          "The largest excess has a local significance of 4.3sigma. This is within the expectation of observing thermal noise only as the probability of observing a local excess at least this large is p is about 0.21 for the full dataset.",
+          "UNSUPPORTED"
+        ],
+        [
+          "This 4.3-sigma excess is a decrease compared to a 6-sigma excess reported in the previous data-taking period.",
+          "The largest excess has a local significance of 4.3sigma. This is within the expectation of observing thermal noise only as the probability of observing a local excess at least this large is p is about 0.21 for the full dataset.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The MT2 multi-jet search's observed limit was found to be approximately 2-sigma weaker than the expected limit.",
+          "Our observed limit for the MT2 search is approximately 2sigma weaker than our expected limit. This is compatible with [36], where the observed limit for direct production of light squarks is also weaker than expected.",
+          "SUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "C2",
+      "category": "C",
+      "difficulty": "partially_answerable",
+      "question": "What simplified model parameters (mediator mass, coupling) are excluded, and what are the exact 95% CL cross-section upper limits at each mass point?",
+      "ground_truth_answer": "The corpus supports partial answers to this question but not a complete one. Mediator-mass exclusions with specific couplings are given: in one ATLAS mono-jet analysis, axial-vector or vector mediator masses below 1.55 TeV are excluded at 95% CL for very light WIMPs, for couplings gq = 1/4 and g_chi = 1 [1711.03301v2]; in a heavy-quark+MET search using the b-FDM simplified model, mediator masses between approximately 300 GeV and 500 GeV are excluded at 95% CL for a DM particle mass of about 35 GeV [1410.4031v2]. However, neither retrieved chunk gives a full table of exact 95% CL cross-section upper limits at each individual mass point -- the closest available cross-section-style limits are WIMP-nucleon spin-dependent cross-section limits (2.9e-43 cm^2 and 3.5e-43 cm^2 for WIMP masses below 10 GeV and 100 GeV) reported at 90% CL, not 95% CL, in [1711.03301v2], and a similar 90% CL spin-dependent limit for a different operator in [1410.4031v2]. A complete answer should note that the exact mass-point-by-mass-point 95% CL cross-section table is not available in the retrieved text, rather than presenting the 90% CL nucleon-cross-section numbers as if they satisfied the 95% CL request.",
+      "gold_chunk_ids": [
+        "arxiv_1711.03301v2_s3357_c0",
+        "arxiv_1410.4031v2_s3457_c3"
+      ],
+      "labeled_sentences": [
+        [
+          "Axial-vector or vector mediator masses below 1.55 TeV are excluded at 95% CL for very light WIMPs, assuming couplings gq = 1/4 and g_chi = 1.",
+          "In the case of axial-vector or vector mediator models, mediator masses below 1.55 TeV are excluded at 95% CL for very light WIMPs (for coupling values gq = 1/4 and g_chi = 1), whereas the analysis does not have the sensitivity to exclude a pseudoscalar scenario.",
+          "SUPPORTED"
+        ],
+        [
+          "In the b-FDM simplified model, mediator masses between approximately 300 GeV and 500 GeV are excluded at 95% CL for a dark matter particle mass of about 35 GeV.",
+          "For a DM particle of approximately 35 GeV, as suggested by the interpretation of data recorded by the Fermi-LAT collaboration, mediator masses between approximately 300 GeV and 500 GeV are excluded at 95% CL.",
+          "SUPPORTED"
+        ],
+        [
+          "WIMP-nucleon cross sections above 2.9e-43 cm^2 are excluded at 95% CL for WIMP masses below 10 GeV.",
+          "WIMP-proton cross sections above 2.9 x 10^-43 cm^2 (3.5 x 10^-43 cm^2) are excluded at 90% CL for WIMP masses below 10 GeV (100 GeV), complementing results from direct-detection experiments.",
+          "UNSUPPORTED"
+        ],
+        [
+          "Mediator masses below 1.55 TeV are excluded at 95% CL for couplings gq=1/4 and g_chi=1.",
+          "For a DM particle of approximately 35 GeV, as suggested by the interpretation of data recorded by the Fermi-LAT collaboration, mediator masses between approximately 300 GeV and 500 GeV are excluded at 95% CL.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "C3",
+      "category": "C",
+      "difficulty": "partially_answerable",
+      "question": "How does the analysis define the signal region, and what fraction of signal MC events pass all selection cuts?",
+      "ground_truth_answer": "Signal-region definitions are available in the retrieved evidence, from two different generations of ATLAS monojet/jet+MET analyses. One search defines ten inclusive (IM1-IM10) and ten exclusive (EM1-EM10) signal regions with increasing MET thresholds ranging from 250 GeV to 1000 GeV [1711.03301v2]. An earlier ATLAS monojet analysis instead defines four overlapping signal regions (SR1-SR4) via combined requirements on MET and leading-jet pT, with SR1 chosen so the MET trigger is nearly 100% efficient and SR4 chosen so enough control-sample events remain to validate background estimates [1210.4491v2]. However, none of the retrieved chunks state what fraction of signal Monte Carlo events pass all selection cuts -- that specific quantity is not present in the retrieved evidence, and a correct answer should say so rather than inventing a plausible-sounding efficiency number.",
+      "gold_chunk_ids": [
+        "arxiv_1711.03301v2_s3305_c0",
+        "arxiv_1210.4491v2_s3582_c3"
+      ],
+      "labeled_sentences": [
+        [
+          "One ATLAS search defines ten inclusive and ten exclusive signal regions with MET thresholds increasing from 250 GeV to 1000 GeV.",
+          "Table 1: Inclusive (IM1-IM10) and exclusive (EM1-EM10) signal regions with increasing Emiss T thresholds from 250 GeV to 1000 GeV.",
+          "SUPPORTED"
+        ],
+        [
+          "An earlier ATLAS monojet analysis defines four overlapping signal regions, SR1 through SR4, with SR1 chosen so the MET trigger is nearly 100% efficient.",
+          "Four sets of overlapping kinematic selection criteria, designated as SR1 to SR4... are defined (table 3). The signal region with the lowest Emiss T requirement (SR1) is chosen such that the Emiss T trigger is nearly 100% efficient.",
+          "SUPPORTED"
+        ],
+        [
+          "Approximately 35% of signal Monte Carlo events pass all selection cuts in the signal region.",
+          "Table 1: Inclusive (IM1-IM10) and exclusive (EM1-EM10) signal regions with increasing Emiss T thresholds from 250 GeV to 1000 GeV.",
+          "UNSUPPORTED"
+        ],
+        [
+          "SR1 is chosen so the MET trigger is nearly 100% efficient.",
+          "Table 1: Inclusive (IM1-IM10) and exclusive (EM1-EM10) signal regions with increasing Emiss T thresholds from 250 GeV to 1000 GeV.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "C4",
+      "category": "C",
+      "difficulty": "partially_answerable",
+      "question": "What luminosity was used for the analysis, and how does the total systematic uncertainty compare to the statistical uncertainty in the signal region?",
+      "ground_truth_answer": "The retrieved chunks come from at least three different analyses, and none of them gives both an explicit integrated luminosity value and a systematic-vs-statistical uncertainty comparison for the same analysis -- a correct answer should answer per-paper rather than blending numbers across papers. One ATLAS photon+MET search explicitly states its dataset corresponds to 36.1 fb^-1 of data [1704.03848v2], but this chunk does not give a systematic-vs-statistical breakdown. A separate ATLAS monojet analysis gives an explicit total-systematic-vs-total-statistical comparison across its four signal regions: total systematic uncertainty is 3.4%, 4.4%, 6.8%, and 11.1% for SR1-SR4 respectively, versus total statistical uncertainty of 0.5%, 1.7%, 4.3%, and 11.8% for the same regions -- systematic uncertainty dominates in SR1-SR3, while statistical uncertainty becomes comparable to or slightly larger than systematic uncertainty in SR4 [1210.4491v2]. A separate Z+MET analysis at 8 TeV shows theoretical uncertainty (36-38%) dominating over statistical uncertainty (2-24%) at all MET thresholds shown [1404.0051v3]. A correct answer should attribute the luminosity value and the uncertainty comparison to their respective, distinct analyses rather than presenting them as describing one search.",
+      "gold_chunk_ids": [
+        "arxiv_1210.4491v2_s3599_c16",
+        "arxiv_1704.03848v2_s5589_c1"
+      ],
+      "labeled_sentences": [
+        [
+          "One ATLAS photon+MET analysis is based on 36.1 fb^-1 of data.",
+          "Table 4: Observed event yields in 36.1 fb^-1 of data compared to expected yields from SM backgrounds in the signal region SRI1 and in its four control regions.",
+          "SUPPORTED"
+        ],
+        [
+          "In a separate ATLAS monojet analysis, the total systematic uncertainty across its four signal regions (SR1-SR4) is 3.4%, 4.4%, 6.8%, and 11.1% respectively, compared to a total statistical uncertainty of 0.5%, 1.7%, 4.3%, and 11.8% for the same regions.",
+          "Total systematic uncertainty 3.4 4.4 6.8 11.1 Total data statistical uncertainty 0.5 1.7 4.3 11.8 Table 5. Relative systematic uncertainties for all signal regions (in percent).",
+          "SUPPORTED"
+        ],
+        [
+          "The ATLAS monojet analysis based on 36.1 fb^-1 of data has a total systematic uncertainty of 3.4% to 11.1% across its four signal regions.",
+          "Table 4: Observed event yields in 36.1 fb^-1 of data compared to expected yields from SM backgrounds in the signal region SRI1 and in its four control regions.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The total systematic uncertainty in SR4 is 25%.",
+          "Total systematic uncertainty 3.4 4.4 6.8 11.1 Total data statistical uncertainty 0.5 1.7 4.3 11.8 Table 5. Relative systematic uncertainties for all signal regions (in percent).",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "D1",
+      "category": "D",
+      "difficulty": "unanswerable",
+      "question": "What machine learning architecture does the CMS experiment use for real-time trigger-level anomaly detection in Run 3?",
+      "ground_truth_answer": "CORPUS_INSUFFICIENT: none of the retrieved chunks describe CMS's real-time trigger-level anomaly detection ML architecture for Run 3. The retrieved evidence covers unrelated ML applications (offline BDT/NN-based efficiency parametrizations for long-lived-particle reinterpretation, and ML-assisted background discrimination in a directional dark-matter detector) and a general description of the CMS two-tiered trigger system's rate reduction, but nothing about anomaly detection specifically. A correct answer should refuse rather than repurpose these unrelated ML mentions.",
+      "gold_chunk_ids": [],
+      "labeled_sentences": [
+        [
+          "CMS uses a boosted decision tree architecture for real-time trigger-level anomaly detection in Run 3.",
+          "The ATLAS Run 2 search for LLPs decaying into hadronic jets in the calorimeter provided six-dimensional efficiencies for an event to enter Region A of the ABCD method. These efficiencies parametrise the output of a sequence of boosted decision trees and neural networks as functions of the LLP kinematics, decay type and decay position.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The CMS trigger system uses a two-tiered structure, with a first level using calorimeter and muon information at a rate of around 100 kHz, and a second level reducing the event rate to around 1 kHz.",
+          "The first level, composed of custom hardware processors, uses information from the calorimeters and muon detectors to select events at a rate of around 100 kHz. The second level, based on an array of microprocessors running a version of the full event reconstruction software optimized for fast processing, reduces the event rate to around 1 kHz before data storage.",
+          "SUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "D2",
+      "category": "D",
+      "difficulty": "unanswerable",
+      "question": "What was the total operating budget of the LHC in 2023?",
+      "ground_truth_answer": "CORPUS_INSUFFICIENT: none of the retrieved chunks contain any figure for the LHC's operating budget. The retrieved evidence is entirely unrelated to the question -- a theoretical dark-matter paper on lepton-flavored mediators, and a PhD thesis's carbon-footprint/acknowledgments appendix discussing computing-related greenhouse-gas emissions. A correct answer should refuse rather than repurpose the carbon-footprint numbers as if they were budget figures.",
+      "gold_chunk_ids": [],
+      "labeled_sentences": [
+        [
+          "The total operating budget of the LHC in 2023 was approximately 1 billion Swiss francs.",
+          "Computations on the Worldwide LHC Computing Grid for this work caused emissions equivalent to the global warming potential of 8.8 t CO2 (CO2e).",
+          "UNSUPPORTED"
+        ],
+        [
+          "Computations on the Worldwide LHC Computing Grid for this thesis work caused emissions equivalent to 8.8 tCO2e.",
+          "Computations on the Worldwide LHC Computing Grid for this work caused emissions equivalent to the global warming potential of 8.8 t CO2 (CO2e), estimated with the methodology described in Ref. [450].",
+          "SUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "D3",
+      "category": "D",
+      "difficulty": "unanswerable",
+      "question": "How does the ATLAS detector's calorimeter granularity compare to CMS's HGCAL upgrade?",
+      "ground_truth_answer": "CORPUS_INSUFFICIENT for the comparison asked: no retrieved chunk describes CMS's HGCAL upgrade at all. The corpus does contain a real ATLAS calorimeter granularity figure (liquid-argon EM calorimeters with a typical granularity of 0.025 x 0.025 in delta-eta x delta-phi) [1404.0051v3], but nothing to compare it against for HGCAL specifically, since this corpus predates that upgrade program. A correct answer should state the ATLAS figure if asked about ATLAS alone, but should not claim a comparison to HGCAL that the corpus does not support.",
+      "gold_chunk_ids": [],
+      "labeled_sentences": [
+        [
+          "CMS's HGCAL upgrade provides finer calorimeter granularity than ATLAS's liquid-argon calorimeters.",
+          "Liquid-argon (LAr) electromagnetic sampling calorimeters cover the range |eta| < 3.2 with a typical granularity in delta-eta x delta-phi of 0.025 x 0.025.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The ATLAS liquid-argon electromagnetic calorimeters have a typical granularity of 0.025 x 0.025 in delta-eta x delta-phi.",
+          "Liquid-argon (LAr) electromagnetic sampling calorimeters cover the range |eta| < 3.2 with a typical granularity in delta-eta x delta-phi of 0.025 x 0.025.",
+          "SUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "D4",
+      "category": "D",
+      "difficulty": "unanswerable",
+      "question": "What is the current world-average value of the top quark mass?",
+      "ground_truth_answer": "CORPUS_INSUFFICIENT: no retrieved chunk states a measured value for the top quark mass. The retrieved evidence discusses top-quark jet-tagging techniques (CA15 jets, soft-drop grooming, b-tagging) used to identify hadronically decaying top quarks in a monotop dark-matter search, referencing 'the top quark mass' only as a jet-mass-window selection criterion, not as a measured numeric value. A correct answer should refuse rather than substitute a remembered value from outside the corpus.",
+      "gold_chunk_ids": [],
+      "labeled_sentences": [
+        [
+          "The current world-average top quark mass is 172.5 GeV.",
+          "To be identified as arising from top quark decays, jets must have a mass within a specified interval containing the top quark mass, have a high likelihood of containing a bottom quark, and exhibit certain substructure characteristics.",
+          "UNSUPPORTED"
+        ],
+        [
+          "Jets identified as arising from top quark decays are required to have a mass within a specified interval containing the top quark mass, along with a high likelihood of containing a bottom quark and specific substructure characteristics.",
+          "To be identified as arising from top quark decays, jets must have a mass within a specified interval containing the top quark mass, have a high likelihood of containing a bottom quark, and exhibit certain substructure characteristics.",
+          "SUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "E1",
+      "category": "E",
+      "difficulty": "adversarial_false_premise",
+      "question": "Since the mono-jet search already discovered dark matter, what mediator mass was measured?",
+      "ground_truth_answer": "The premise is false: none of the retrieved evidence describes a mono-jet dark matter discovery. Mono-jet searches at ATLAS and CMS are described as setting exclusion limits on dark matter production by fitting the missing-transverse-energy spectrum shape, and are explicitly noted to provide insufficient information to determine additional DM properties precisely because no signal has been found and the MET spectrum shape is largely independent of the mediation mechanism [1812.08129v3]. A correct answer should point out that no mediator mass has been measured, because these are null-result/exclusion analyses, not discoveries.",
+      "gold_chunk_ids": [
+        "arxiv_1812.08129v3_s509_c0"
+      ],
+      "labeled_sentences": [
+        [
+          "Mono-jet searches place leading constraints on dark matter production by fitting the missing transverse energy spectrum, but existing measurements provide insufficient information to determine additional dark matter properties beyond these limits.",
+          "LHC measurements of the Emiss T distribution in mono-jet production place the leading constraints on s-channel DM simplified models in certain regions of parameter space. However, since the corresponding shapes of the Emiss T spectra are featureless and largely independent of the type of mediation mechanism, existing mono-jet measurements provide insufficient information to determine additional DM properties.",
+          "SUPPORTED"
+        ],
+        [
+          "The mono-jet search discovered dark matter with a measured mediator mass of 750 GeV.",
+          "LHC measurements of the Emiss T distribution in mono-jet production place the leading constraints on s-channel DM simplified models in certain regions of parameter space. However... existing mono-jet measurements provide insufficient information to determine additional DM properties.",
+          "UNSUPPORTED"
+        ],
+        [
+          "The observed limit for the MT2 multi-jet search was found to be approximately 2-sigma weaker than the expected limit, consistent with a null result rather than a discovery.",
+          "Our observed limit for the MT2 search is approximately 2sigma weaker than our expected limit.",
+          "SUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "E2",
+      "category": "E",
+      "difficulty": "adversarial_false_premise",
+      "question": "Given that the ABCD method requires four independent detectors, which four subdetectors are used?",
+      "ground_truth_answer": "The premise is false. The ABCD method is a data-driven background-estimation technique that relies on two independent kinematic/discriminating variables, not four subdetectors; the two-dimensional plane these two variables define is divided into four bins (labeled A-D), and it is these four bins, not four detectors, that give the method its name [2305.11649v2]. A correct answer should correct this premise rather than naming four subdetector systems.",
+      "gold_chunk_ids": [
+        "arxiv_2305.11649v2_s3137_c14"
+      ],
+      "labeled_sentences": [
+        [
+          "The ABCD method relies on two independent discriminating variables, and it is the resulting four bins of their two-dimensional plane, not four detectors, that give the method its name.",
+          "A modified matrix (\"ABCD\") method is employed to estimate the backgrounds, relying on two independent variables to discriminate between signal and background. The two-dimensional plane formed by these variables is divided into four bins (A-D).",
+          "SUPPORTED"
+        ],
+        [
+          "The four subdetectors used in the ABCD method are the tracker, calorimeter, muon system, and forward detector.",
+          "A modified matrix (\"ABCD\") method is employed to estimate the backgrounds, relying on two independent variables to discriminate between signal and background. The two-dimensional plane formed by these variables is divided into four bins (A-D).",
+          "UNSUPPORTED"
+        ],
+        [
+          "The ABCD method's four components correspond to the four pillars of dark matter detection: direct detection, indirect detection, collider searches, and astrophysical probes.",
+          "THE FOUR PILLARS OF DARK MATTER DETECTION A. Direct Detection Dark matter permeates the whole Universe, and its local density on Earth is known to be 5 x 10^-25 g/cm^3 to within a factor of 2.",
+          "UNSUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "E3",
+      "category": "E",
+      "difficulty": "adversarial_false_premise",
+      "question": "Why did the paper conclude that missing transverse energy is caused by dark matter escaping the detector, rather than being an inference?",
+      "ground_truth_answer": "The premise is false: no retrieved paper concludes that MET is directly caused by dark matter as an established fact rather than an inference. On the contrary, the retrieved evidence explicitly frames this as an inference: 'their presence can be inferred from the momentum imbalance in the plane perpendicular to the beam direction' [1411.0511v2], referring to neutrinos and hypothetical neutral weakly-interacting particles collectively, not dark matter alone. Similarly, another search explicitly works within an interpretive framework -- effective field theory or simplified models -- assuming a dark matter hypothesis to be tested against data, rather than asserting that observed MET proves dark matter escaped the detector [1206.0753v1]. A correct answer should reject the premise and describe MET-based searches as testing a dark-matter hypothesis via inference, not concluding direct causation.",
+      "gold_chunk_ids": [
+        "arxiv_1411.0511v2_s4473_c0",
+        "arxiv_1206.0753v1_s427_c0"
+      ],
+      "labeled_sentences": [
+        [
+          "The presence of neutrinos and hypothetical neutral weakly interacting particles, which do not leave a signal in the detector, can be inferred from the momentum imbalance in the plane perpendicular to the beam direction.",
+          "Notable exceptions are neutrinos and hypothetical neutral weakly interacting particles. Although these particles do not leave a signal in the detector, their presence can be inferred from the momentum imbalance in the plane perpendicular to the beam direction.",
+          "SUPPORTED"
+        ],
+        [
+          "The paper concludes with certainty that observed missing transverse energy is directly caused by dark matter particles escaping the detector.",
+          "Notable exceptions are neutrinos and hypothetical neutral weakly interacting particles. Although these particles do not leave a signal in the detector, their presence can be inferred from the momentum imbalance in the plane perpendicular to the beam direction.",
+          "UNSUPPORTED"
+        ],
+        [
+          "Searches for dark matter at colliders work within model-dependent or model-independent frameworks, assuming a dark matter hypothesis to be tested against the data rather than directly observed.",
+          "Searches for dark matter at colliders have previously been performed in the context of new physics models such as Supersymmetry... Recently, more model-independent approaches have been considered in which no assumptions are made about the new physics model that is producing the WIMPs.",
+          "SUPPORTED"
+        ]
+      ]
+    },
+    {
+      "id": "E4",
+      "category": "E",
+      "difficulty": "adversarial_false_premise",
+      "question": "Since pileup corrections are applied after the trigger decision, how much does pileup affect which events are recorded in the first place?",
+      "ground_truth_answer": "None of the retrieved chunks directly describe how pileup affects trigger-level event selection, i.e. whether pileup changes which events are recorded at trigger level. The corpus does confirm that the pileup correction discussed is an offline correction applied to already-reconstructed MET after event recording, not a trigger-level adjustment -- the correction formula f(v) = c1(1 + erf(-c2|v|^c3)) is applied to reconstructed particle-flow MET as a downstream analysis step [1411.0511v2] -- but no retrieved chunk quantifies or discusses how pileup itself influences trigger rates or thresholds at the point of event recording. A correct answer should note this gap rather than assuming the corpus confirms trigger-level pileup effects are negligible (or significant) when it simply does not address that question.",
+      "gold_chunk_ids": [],
+      "labeled_sentences": [
+        [
+          "The pileup correction discussed is an offline correction applied to already-reconstructed missing transverse energy, parametrized as f(v) = c1(1 + erf(-c2|v|^c3)), rather than a trigger-level adjustment.",
+          "The correction is parametrized by f(v) = c1(1.0 + erf(-c2|v|^c3)) where v is the vectorial pT sum of charged particles associated with a given pileup vertex.",
+          "SUPPORTED"
+        ],
+        [
+          "Pileup has a negligible effect on trigger-level event selection, changing the recorded event rate by less than 1%.",
+          "The correction is parametrized by f(v) = c1(1.0 + erf(-c2|v|^c3)) where v is the vectorial pT sum of charged particles associated with a given pileup vertex.",
+          "UNSUPPORTED"
+        ],
+        [
+          "Pileup interactions degrade the missing transverse energy resolution by about 3.3 to 3.6 GeV in quadrature per additional pileup interaction.",
+          "We find that pileup interactions contribute to the degradation of the PF MET resolution by 3.3-3.6 GeV (in quadrature) per additional pileup interaction, similar to the results obtained with the 7 TeV pp data.",
+          "SUPPORTED"
+        ]
+      ]
+    }
+  ]
+}
